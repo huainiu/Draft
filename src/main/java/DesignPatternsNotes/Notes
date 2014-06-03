@@ -1,0 +1,7 @@
+Design Patterns Notes:
+
+DESIGN PRINCIPLES:
+1.  Identify the aspects of your application that vary (tend to change a lot) and encapsulate them
+    from the rest of your program.
+
+2.

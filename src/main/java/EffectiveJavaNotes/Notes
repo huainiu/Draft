@@ -1,0 +1,163 @@
+Rules:
+
+1.  Check the validity of parameters that are passed to methods/constructors/setters (check for null, other restrictions).
+
+2.  In a new class override default methods (see the PhoneNumber class example and NOTE 1):
+    2.1 toString: make it readable and informative.
+    2.2 equals: to behave consistently with your demands.
+    2.3 hashCode: (You must override hashCode in every class that overrides equals).
+        2.3.1 Whenever it is invoked on the same object more than once during an execu-
+              tion of an application, the  hashCode method must consistently return the
+              same integer.
+        2.3.2 If two objects are equal according to the  equals(Object) method, then call-
+              ing the  hashCode method on each of the two objects must produce the same
+              integer result.
+        2.3.3 It is not required that if two objects are unequal according to the  equals(Ob-
+              ject) method, then calling the  hashCode method on each of the two objects
+              must produce distinct integer results.
+
+3.  Encapsulation: make your class as inaccessible as possible (methods and fields should be private or have a package level access,
+    unless there is a good reason to make it public.
+    3.1 In public classes, use accessor methods, not public fields - setters and getters.
+    3.2 Minimize mutability (consider implementing a Factory pattern, for example as in valueOf method, by providing the required arguments
+        and returning the object).
+
+4.  Abstract Classes vs. Interfaces:
+    4.1 Abstract classes are permitted to contain implementations for some of their methods, interfaces are not.
+    4.2 Only one abstract class can be inherited at a time, a class can implement several interfaces.
+    4.3 An interface can be implemented retroactively (like Comparable) and easily, just add the required methods.
+    4.4 It is far easier to evolve an abstract class than an interface. If you want to add a method to your abstract class it is easier,
+        than adding a method to interface, as all the classes that implement the interface would have to implement the new method.
+    4.5 Generally interfaces should be preferred over abstract classes.
+        Interfaces should ONLY say about what a client can do with instances of the class.
+
+5.  Nested classes (a nested class should exist only to serve its enclosing class):
+    static member classes, non-static member classes, anonymous classes, and local classes.
+
+6.  Try to avoid casts (Object), a good code doesn't use casting, instead use generics if possible.
+
+7.  Work with interfaces, not specific implantation.
+    7.1 Methods should accept interfaces as arguments (List, not arrayList).
+    7.2 Initialization: List list = new ArrayList(); / Map map = new HashMap();
+
+8.  Documentation (method comment) (NOTE 2):
+    8.1 Summary description of the method.
+    8.2 @param  description of the parameters.
+    8.3 @return description of the return value.
+    8.4 @throws description of the exception the method throws.
+    8.5 @code   optionally illustrate the code (for example in the exception case).
+
+9.  Naming conventions (NOTE 4):
+    9.1 Packages: components separated by periods; components should consist of lowercase alphabetic characters and,
+         rarely, digits.
+    9.2 Class, interface, enam names: capitalized, one or more words,.
+    9.3 Methods, filed names, local variables: lower case, camelCase.
+    9.4 Constant fields (a static final field whose value is immutable): UPPER_CASE with underscore.
+
+10. Use BigDecimal instead of double where precise calculation is important (NOTE 3).
+
+11. Exceptions (NOTE 5):
+    11.1 Checked: (i.e. these that you explicitly catch or rethrow) use checked exceptions for recoverable conditions. They should subclass Exception.
+    11.2 Unchecked: use runtime exceptions for programming errors. They should subclass  RuntimeException.
+    11.3 Errors: errors are reserved for use by the JVM to indicate resource deficiencies, invariant failures,
+         or other conditions that make it impossible to continue execution.
+    11.4 Catch more general exceptions, throw more specific exception (NOTE 6).
+
+12. Concurrency: when multiple threads share mutable data, each thread that reads or writes the data must perform synchronization.
+    12.1 synchronized: keyword ensures that only a single thread can execute a method or block at one time.
+    12.2 volatile: (performs no mutual exclusion) guarantees that any thread that reads the field
+         will see the most recently written value.
+
+
+
+
+
+
+
+
+
+
+
+
+______________________________________________________________________________________
+NOTES:
+
+1. How to document an overriden method:
+
+        /**
+        * Returns a brief description of this potion. The exact details
+        * of the representation are unspecified and subject to change,
+        * but the following may be regarded as typical:
+        *
+        * "[Potion #9: type=love, smell=turpentine, look=india ink]"
+        */
+        @Override public String toString() { ... }
+
+   For a more specific example see PhoneNumber class.
+
+
+2. Example of a method documentation:
+
+        /**
+        * Returns the element at the specified position in this list.
+        *
+        * <p>This method is <i>not</i> guaranteed to run in constant
+        * time. In some implementations it may run in time proportional
+        * to the element position.
+        *
+        * @param index index of element to return; must be
+        * non-negative and less than the size of this list
+        * @return the element at the specified position in this list
+        * @throws IndexOutOfBoundsException if the index is out of range
+        * ({@code index < 0 || index >= this.size()})
+        */
+        E get(int index);
+
+
+3. BigDecimal vs. double:
+
+        BigDecimal x = BigDecimal.valueOf(9.2);
+        BigDecimal y = BigDecimal.valueOf(0.12);
+        System.out.println(x.subtract(y));      --> 8.21
+        System.out.println(9.2-0.99);           --> 8.209999999999999
+
+
+4. For quick reference, the following table shows examples of typographical conventions:
+
+   Identifier Type          Examples
+   Package                  com.google.inject, org.joda.time.format
+   Class or Interface       Timer, FutureTask, LinkedHashMap, HttpServlet
+   Method or Field          remove, ensureCapacity, getCrc
+   Constant Field           MIN_VALUE, NEGATIVE_INFINITY
+   Local Variable           i, xref, houseNumber
+   Type Parameter           T, E, K, V, X, T1, T2
+
+
+5. This table summarizes the most commonly reused exceptions:
+
+   Exception                           Occasion for Use
+   IllegalArgumentException            Non-null parameter value is inappropriate
+   IllegalStateException               Object state is inappropriate for method invocation
+   NullPointerException                Parameter value is null where prohibited
+   IndexOutOfBoundsException           Index parameter value is out of range
+   ConcurrentModificationException     Concurrent modification of an object has
+                                       been detected where it is prohibited
+   UnsupportedOperationException       Object does not support method
+
+6. /**
+   * Returns the element at the specified position in this list.
+   * @throws IndexOutOfBoundsException if the index is out of range
+   * ({@code index < 0 || index >= size()}).
+   */
+   public E get(int index) {
+    ListIterator<E> i = listIterator(index);
+    try {
+        return i.next();
+    } catch(NoSuchElementException e) {
+        throw new IndexOutOfBoundsException("Index: " + index);
+    }
+   }
+
+
+
+_______________________________________________________________________________________

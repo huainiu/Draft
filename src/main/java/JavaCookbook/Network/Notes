@@ -1,0 +1,9 @@
+1.  Securing a Web Server with SSL and JSSE:
+    1.1 JSSE - Java Secure Socket Extension.
+    1.2 SSL  -  Secure Sockets Layer.
+
+    The simplest way to use SSL is simply to get your ServerSocket from an SSLServerSocketFactory
+    instead of using the ServerSocket constructor directly. The SSLServerSocketFactory returns
+    a ServerSocket that is set up to do SSL encryption.
+    For an example, see class JSSEWebServer0.
+

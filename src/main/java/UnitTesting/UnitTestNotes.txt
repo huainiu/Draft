@@ -1,0 +1,46 @@
+SUT, or System Under Misc.Test, we understand the part of the system being tested.
+    Depending on the type of test, SUT may be of very different granularity –
+    from a single class to a whole application.
+    DOC, or Depended On Component, is any entity that is required by an SUT to fulfill its duties. Usually a DOC is of the same granularity as the SUT,
+    e.g. if the SUT is a class, then it uses other classes, if it is a module, then it collaborates with other modules.
+
+Unit tests focus on single classes. They exist to make sure that your code works.
+    Here is a generic description of a typical unit test from our perspective: “Confirm that the
+    method accepts the expected range of input, and that the method returns the expected
+    value for each input.
+
+Integration tests focus on the proper integration of different modules of your code, including - and this is especially valuable -
+    with code over which you have no control.
+
+End-to-end tests exist to verify that your code works from the client’s point of view. They put the system as a whole to the test,
+    mimicking the way the user would use it.
+
+A best-practice is to name your test methods following the  testXXX pattern.
+
+Runner                                            Purpose
+org.junit.internal.runners.JUnit38ClassRunner     This runner is included in the current release
+                                                  of JUnit only for backward compatibility. It will
+                                                  start the test case as a JUnit38 test case.
+
+org.junit.runners.JUnit4                          This runner is inclined to force JUnit to start
+                                                  the test case as a JUnit4 test case.
+
+org.junit.runners.Parameterized                   Parameterized test-runner is supposed to run
+                                                  same sets of tests with different parameters.
+
+org.junit.runners.Suite                           The Suite is actually a container that can hold
+                                                  different tests together. The Suite is also a runner
+                                                  that executes all the  @Misc.Test annotated methods
+                                                  in your test-class.
+
+DOMAIN OBJECT — In the context of unit testing, the term domain object is
+    used to contrast and compare the objects you use in your application with the objects
+    that you use to test your application (TEST OBJECTS). Any object under test is considered to
+    be a domain object.
+
+JUnit best practices: explain the failure reason in assert calls
+    Whenever you use any of the JUnit  assert* methods, make sure you use the signature
+    that takes a  String as the first parameter. This parameter lets you provide a
+    meaningful textual description that is displayed in the JUnit test runner if the assert fails.
+    Not using this parameter makes it difficult to understand the reason for a failure when it
+    happens.

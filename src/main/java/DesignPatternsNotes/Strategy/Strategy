@@ -1,0 +1,4 @@
+STRATEGY
+The Strategy pattern defines a family of algorithms, encapsulates each one, and makes them interchangeble.
+Strategy lets the algorithm vary independently from clients that use it.
+

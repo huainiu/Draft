@@ -1,0 +1,22 @@
+SPRING NOTES:
+
+1.
+
+Namespace   Purpose
+aop         Provides elements for declaring aspects and for automatically proxying @AspectJ-
+            annotated classes as Spring aspects.
+beans       The core primitive Spring namespace, enabling declaration of beans and how they
+            should be wired.
+context     Comes with elements for configuring the Spring application context, including the abil-
+            ity to autodetect and autowire beans and injection of objects not directly managed by
+            Spring.
+jee         Offers integration with Java EE APIs such as JNDI and EJB.
+jms         Provides configuration elements for declaring message-driven POJOs.
+lang        Enables declaration of beans that are implemented as Groovy, JRuby, or BeanShell
+            scripts.
+mvc         Enables Spring MVC capabilities such as annotation-oriented controllers, view control-
+            lers, and interceptors.
+oxm         Supports configuration of Spring’s object-to-XML mapping facilities.
+tx          Provides for declarative transaction configuration.
+util        A miscellaneous selection of utility elements. Includes the ability to declare collec-
+            tions as beans and support for property placeholder elements.
